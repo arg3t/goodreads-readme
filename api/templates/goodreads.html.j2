@@ -1,0 +1,118 @@
+<svg width="480" height="133" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <foreignObject width="480" height="133">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="container">
+            <style>
+                div {
+                    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+                }
+
+                .main {
+                    display: flex;
+                }
+
+                .container {
+                    border-radius: 5px;
+                    padding: 10px 10px 10px 0px;
+                }
+
+                .reading {
+                    font-weight: bold;
+                    color: #53b14f;
+                    text-align: center;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .not-read {
+                    color: #ff1616;
+                }
+
+                .art {
+                    float: left;
+                    width: 27%;
+                    margin-left: -5px;
+                }
+
+                .text {
+                    width: 71%;
+                }
+
+                .book {
+                    font-size: 18px;
+                    color: #666;
+                    text-align: center;
+                    margin-top: 3px;
+                }
+
+                .author {
+                    font-size: 12px;
+                    color: #b3b3b3;
+                    text-align: center;
+                    margin-bottom: 5px;
+                }
+
+                .logo {
+                    margin-left: 5px;
+                    margin-top: 5px;
+                }
+
+                .cover {
+                    border-radius: 2px;
+                }
+
+                .progressbar-container {
+                    position: relative;
+                    text-align: center;
+                    border-style: solid;
+                    border-radius: 2px;
+                    width: 100%;
+                    border-width: 1px;
+                    border-color: #666;
+                }
+
+                .progressbar {
+                    padding: 1px;
+                    width: {{progress}}%;
+                    height: 18px;
+                    background-color: #999;
+                }
+
+                .progressbar-text{
+                    display: inline-block;
+                    margin: 0px;
+                    padding-top: 1px;
+                    color: #222;
+                    position: absolute;
+                }
+            </style>
+
+            {% if book_name %}
+
+            <div class="main">
+                <a class="art" href="{}" target="_BLANK">
+                    <center>
+                            <img src="data:image/png;base64, {{img}}" class="cover" />
+                    </center>
+                </a>
+
+                <div class="text">
+                    <div class="book">{{book_name}}</div>
+                    <div class="author">by {{author}}</div>
+                    <div class="progressbar-container">
+                        <p class="progressbar-text">
+                            {{progress}}%
+                        </p>
+                        <div class="progressbar">
+                        </div>
+                    </div>
+                </div>
+
+                {% else %}
+                    <div class="reading not-read">Nothing on GoodReads</div>
+                {% endif %}
+            </div>
+
+        </div>
+    </foreignObject>
+</svg>
