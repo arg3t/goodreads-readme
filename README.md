@@ -3,7 +3,7 @@
 This project provides a badge for sharing your current book in your github profile.
 
 <p align="center">
-  <img src="" alt="GoodReads"/>
+  <img src="https://goodreads-readme.vercel.app/api/book" alt="GoodReads"/>
 </p>
 
 
