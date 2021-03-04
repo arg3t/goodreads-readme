@@ -3,6 +3,9 @@ from base64 import b64encode
 import feedparser
 import re
 
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
+
 import requests
 import json
 import os

@@ -7,6 +7,6 @@ This project provides a badge for sharing your current book in your github profi
 </p>
 
 
-It is heavily inspired by [https://github.com/novatorem/spotify-readme](spotify-readme).  
+It is heavily inspired by [spotify-readme](https://github.com/novatorem/spotify-readme).  
 
-Install instructions are available [https://github.com/thefr1nge/goodreads-readme/blob/master/SetUp.md](here).
+Install instructions are available [here](https://github.com/thefr1nge/goodreads-readme/blob/master/SetUp.md).
