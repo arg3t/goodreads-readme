@@ -14,14 +14,16 @@ import random
 GOODREADS_RSS_URL = os.getenv("GOODREADS_RSS_URL")
 
 PROGRESS_REGEX = r".*<img .* alt=\"([^\"]*) by ([^\"]*)\".*src=\"([^\"]*)\".*.* is on page ([0-9]*) of ([0-9]*) of <a.*"
-READ_REGEX = r".*<img .* alt=\"([^\"]*) by ([^\"]*)\".*src=\"([^\"]*)\".*"
+READ_REGEX = r".*<img .* alt=\"([^\"]*) by ([^\"]*)\".*src=\"([^\"]*)\".*has read.*"
 
 def loadImageB64(url):
     resposne = requests.get(url)
     return b64encode(resposne.content).decode("ascii")
 
 def makeSVG(book, author, progress, img_url):
-    img = loadImageB64(img_url)
+    img = ''
+    if img_url != '':
+        img = loadImageB64(img_url)
 
     dataDict = {
         "progress": progress,
@@ -43,8 +45,10 @@ def last_activity(path):
     entries = activityFeed.entries
     pr = re.compile(PROGRESS_REGEX)
     rr = re.compile(READ_REGEX)
+    book, author, img, progress = '', '', '', ''
     for i in entries:
         i["summary"] = i["summary"].replace("&lt;","<").replace("&gt;",">").replace("&quot;","\"").replace("\n","")
+        print(i["summary"])
         res = pr.search(i["summary"])
         if res:
             book, author, img = res.group(1,2,3)
@@ -56,11 +60,11 @@ def last_activity(path):
                 progress = 100
             else:
                 continue
-        svg = makeSVG(book, author, progress, img)
-        resp = Response(svg, mimetype="image/svg+xml")
-        resp.headers["Cache-Control"] = "s-maxage=1"
-        return resp
-    return data
+        break
+    svg = makeSVG(book, author, progress, img)
+    resp = Response(svg, mimetype="image/svg+xml")
+    resp.headers["Cache-Control"] = "s-maxage=1"
+    return resp
 
 if __name__ == "__main__":
     app.run(debug=True)
