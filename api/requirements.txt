@@ -1,4 +1,4 @@
 flask==2.0.2
 requests==2.24.0
 python-dotenv==0.14.0
-feedparser==5.2.0
+feedparser==6.0.2
