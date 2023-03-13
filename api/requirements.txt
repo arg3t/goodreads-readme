@@ -1,5 +1,4 @@
-setuptools==58
-flask==1.1.2
-requests==2.24.0
-python-dotenv==0.14.0
-feedparser==5.2.1
+flask
+requests
+python-dotenv
+feedparser
