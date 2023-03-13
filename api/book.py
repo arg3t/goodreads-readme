@@ -14,7 +14,7 @@ import random
 GOODREADS_RSS_URL = os.getenv("GOODREADS_RSS_URL")
 
 PROGRESS_REGEX = r".*<img .* alt=\"([^\"]*) by ([^\"]*)\".*src=\"([^\"]*)\".*.* is on page ([0-9]*) of ([0-9]*) of <a.*"
-READ_REGEX = r".*<img .* alt=\"([^\"]*) by ([^\"]*)\".*src=\"([^\"]*)\".*has read.*"
+READ_REGEX = r".*<img .* alt=\"([^\"]*) by ([^\"]*)\".*src=\"([^\"]*)\".*finished reading.*"
 
 def loadImageB64(url):
     resposne = requests.get(url)
