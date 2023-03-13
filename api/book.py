@@ -1,4 +1,4 @@
-from flask import Flask, Response, jsonify, render_template
+from flask import Flask, Response, jsonify, render_template, request
 from base64 import b64encode
 import feedparser
 import re
@@ -11,7 +11,6 @@ import json
 import os
 import random
 
-GOODREADS_RSS_URL = os.getenv("GOODREADS_RSS_URL")
 
 PROGRESS_REGEX = r".*<img .* alt=\"([^\"]*) by ([^\"]*)\".*src=\"([^\"]*)\".*.* is on page ([0-9]*) of ([0-9]*) of <a.*"
 READ_REGEX = r".*<img .* alt=\"([^\"]*) by ([^\"]*)\".*src=\"([^\"]*)\".*finished reading.*"
@@ -40,7 +39,9 @@ app = Flask(__name__)
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
 def last_activity(path):
-    activityFeed = feedparser.parse(GOODREADS_RSS_URL)
+    goodread_rss_url = f'https://www.goodreads.com/user/updates_rss/{request.args.get("id")}'
+    print(goodread_rss_url)
+    activityFeed = feedparser.parse(goodread_rss_url)
     data = ""
     entries = activityFeed.entries
     pr = re.compile(PROGRESS_REGEX)
