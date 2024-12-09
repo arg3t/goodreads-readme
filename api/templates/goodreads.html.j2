@@ -1,118 +1,103 @@
-<svg width="480" height="133" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <foreignObject width="480" height="133">
-        <div xmlns="http://www.w3.org/1999/xhtml" class="container">
-            <style>
-                div {
-                    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
-                }
+<svg width="800" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <foreignObject width="800" height="200">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="container">
 
-                .main {
-                    display: flex;
-                }
+      <style>
 
-                .container {
-                    border-radius: 5px;
-                    padding: 10px 10px 10px 0px;
-                }
+  div {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+  }
 
-                .reading {
-                    font-weight: bold;
-                    color: #53b14f;
-                    text-align: center;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
+  .main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Optional: Adds spacing between book items */
+  }
 
-                .not-read {
-                    color: #ff1616;
-                }
+  .book-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Ensures titles are at the bottom */
+    width: 150px; /* Adjust to fit your needs */
+    box-sizing: border-box;
+  }
 
-                .art {
-                    float: left;
-                    width: 27%;
-                    margin-left: -5px;
-                }
+  .container {
+    border-radius: 5px;
+    padding: 10px 10px 10px 0px;
+  }
 
-                .text {
-                    width: 71%;
-                }
+  .reading {
+    font-weight: bold;
+    color: #53b14f;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-                .book {
-                    font-size: 18px;
-                    color: #666;
-                    text-align: center;
-                    margin-top: 3px;
-                }
+  .not-read {
+    color: #ff1616;
+  }
 
-                .author {
-                    font-size: 14px;
-                    color: #b3b3b3;
-                    text-align: center;
-                    margin-bottom: 5px;
-                }
+  .art {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: auto; /* Pushes the text to the bottom */
+  }
 
-                .logo {
-                    margin-left: 5px;
-                    margin-top: 5px;
-                }
+  .cover {
+    border-radius: 2px;
+    max-height: 200px; /* Fixed height for book covers */
+    width: auto; /* Maintains aspect ratio */
+    display: block;
+  }
 
-                .cover {
-                    border-radius: 2px;
-                }
+  .text {
+    text-align: center;
+    margin-top: auto; /* Ensures the text stays at the bottom */
+  }
 
-                .progressbar-container {
-                    position: relative;
-                    text-align: center;
-                    border-style: solid;
-                    border-radius: 2px;
-                    width: 100%;
-                    border-width: 1px;
-                    border-color: #666;
-                }
+  .book {
+    font-size: 18px;
+    color: #666;
+  }
 
-                .progressbar {
-                    padding: 1px;
-                    width: {{progress}}%;
-                    height: 18px;
-                    background-color: #AAA;
-                }
+  .author {
+    font-size: 14px;
+    color: #b3b3b3;
+    margin-top: 3px;
+  }
 
-                .progressbar-text{
-                    display: inline-block;
-                    margin: 0px;
-                    padding-top: 2px;
-                    color: #555;
-                    position: absolute;
-                }
-            </style>
+  .logo {
+    margin-left: 5px;
+    margin-top: 5px;
+  }
+      </style>
+      <div class="main">
+        {% if books|length > 0 %}
+        {% for book in books %}
+        <div class="book-item">
+          <center>
+            <a class="art" href="" target="_BLANK">
+              <img src="data:image/png;base64, {{ book.img }}" class="cover" />
+            </a>
+          </center>
 
-
-            <div class="main">
-                {% if book_name %}
-                <a class="art" href="{}" target="_BLANK">
-                    <center>
-                            <img src="data:image/png;base64, {{img}}" class="cover" />
-                    </center>
-                </a>
-
-                <div class="text">
-                    <div class="book">{{book_name}}</div>
-                    <div class="author">by {{author}}</div>
-                    <div class="progressbar-container">
-                        <p class="progressbar-text">
-                            {{progress}}%
-                        </p>
-                        <div class="progressbar">
-                        </div>
-                    </div>
-                </div>
-
-                {% else %}
-                    <div class="reading not-read">Nothing on GoodReads</div>
-                {% endif %}
-            </div>
-
+          <div class="text">
+            <div class="book">{{ book.title }}</div>
+            <div class="author">by {{ book.author }}</div>
+          </div>
         </div>
-    </foreignObject>
+        {% endfor %}
+        {% else %}
+        <div class="reading not-read">Nothing on Goodreads</div>
+        {% endif %}
+      </div>
+
+    </div>
+  </foreignObject>
 </svg>
